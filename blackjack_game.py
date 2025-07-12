@@ -78,17 +78,17 @@ class Hand:
   def is_blackjack(self):
       return self.get_value() == 21
 
-  def display(self):
-      print(f'''{"Dealer's" if self.dealer else "Your"} hand:''')
-      for index, card in enumerate( self.cards):
-        if index == 0 and self.dealer and not show_all_dealer_cards and not is_blackjack():
-          print("hidden")
+  def display(self, show_all_dealer_cards=False):
+    print(f'''{"Dealer's" if self.dealer else "Your"} hand:''')
+    for index, card in enumerate(self.cards):
+        if index == 0 and self.dealer and not show_all_dealer_cards:
+            print("hidden")
         else:
-          print(card)
+            print(card)
+    if not self.dealer or show_all_dealer_cards:
+        print("Value:", self.get_value())
+    print()
 
-      if not self.dealer:
-          print("value:", self.get_value())
-      print()
 
 class Game:
   def play(self):
@@ -101,7 +101,8 @@ class Game:
         print("You must enter a number. ")
 
     while game_number < games_to_play:
-      game_nunber += 1
+        game_number += 1
+
 
     deck = Deck()
     deck.shuffle()
@@ -144,7 +145,7 @@ class Game:
         while dealer_hand_value < 17:
           dealer_hand.add_card(deck.deal(1))
           dealer_hand_value = dealer_hand.get_value()
-        def display(self, show_all_dealer_cards=False):
+        
 
 
         if self.check_winner(player_hand, dealer_hand):
@@ -156,7 +157,7 @@ class Game:
 
         self.check_winner( player_hand, dealer_hand, True)
 
-    print("\nThanks fornplaying!")
+    print("\nThanks for playing!")
 
   def check_winner(self, player_hand, dealer_hand, game_over=False):
     if not game_over:
