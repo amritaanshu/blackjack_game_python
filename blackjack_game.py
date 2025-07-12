@@ -101,7 +101,7 @@ class Game:
         print("You must enter a number. ")
 
     while game_number < games_to_play:
-      game_munber += 1
+      game_nunber += 1
 
     deck = Deck()
     deck.shuffle()
