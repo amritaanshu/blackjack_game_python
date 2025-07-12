@@ -32,7 +32,7 @@ class Deck:
             {"rank": "10", "value": 10},
             {"rank": "J", "value": 10},
             {"rank": "Q", "value": 10},
-            {"rank": "K", "vakue": 10}]
+            {"rank": "K", "value": 10}]
     for suit in suits:
       for rank in ranks:
         self.cards.append(Card(suit, rank))
@@ -125,11 +125,12 @@ class Game:
 
       choice = ""
       while player_hand.get_value() < 21 and choice not in ["s", "stand"]:
-        choice = input("please choose 'Hit' or 'Stand':").lower()
-        print()
-        while choice not in ["h", "s", "hit", "stand"]:
-          choice = input("Please enter 'Hit' or 'Stand' (or H/S)").lower()
-          print()
+        while True:
+            choice = input("Please choose 'Hit' or 'Stand' (H/S): ").lower()
+            if choice in ["h", "hit", "s", "stand"]:
+                break
+            print("Invalid input. Try again.")
+
         if choice in ["hit", "h"]:
           player_hand.add_card(deck.deal(1))
           player_hand.display()
@@ -138,12 +139,13 @@ class Game:
           continue
 
         player_hand_value = player_hand.get_value()
-        dealer_hand_value = dealer_hamd.get_value()
+        dealer_hand_value = dealer_hand.get_value()
 
         while dealer_hand_value < 17:
           dealer_hand.add_card(deck.deal(1))
           dealer_hand_value = dealer_hand.get_value()
-        dealer_hand.display(show_all_dealer_cards=True)
+        def display(self, show_all_dealer_cards=False):
+
 
         if self.check_winner(player_hand, dealer_hand):
           continue
